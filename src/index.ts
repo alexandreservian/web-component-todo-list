@@ -1,3 +1,3 @@
-import TodoList from "./components/todo-list";
+import TodoList from './components/todo-list';
 
-window.customElements.define("todo-list", TodoList);
+window.customElements.define('todo-list', TodoList);

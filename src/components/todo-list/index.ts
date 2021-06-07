@@ -1,16 +1,16 @@
 class TodoList extends HTMLElement {
-	private root: ShadowRoot;
-	private $form: HTMLFormElement | null = null;
-	private $input: HTMLInputElement | null = null;
-	private $ul: HTMLUListElement | null = null;
+  private root: ShadowRoot;
+  private $form: HTMLFormElement | null = null;
+  private $input: HTMLInputElement | null = null;
+  private $ul: HTMLUListElement | null = null;
 
-	constructor() {
-		super();
-		this.root = this.attachShadow({ mode: "open" });
-	}
+  constructor() {
+    super();
+    this.root = this.attachShadow({ mode: 'open' });
+  }
 
-	connectedCallback(): void {
-		const template: string = `
+  connectedCallback(): void {
+    const template: string = `
       <style>
         :host {
 					display: flex;
@@ -94,49 +94,49 @@ class TodoList extends HTMLElement {
 				<ul></ul>
       </div>
     `;
-		this.root.innerHTML = template;
-		this.$form = this.root.querySelector("form");
-		this.$input = this.root.querySelector("input");
-		this.$ul = this.root.querySelector("ul");
-		this.$form?.addEventListener("submit", this.handleOnSubmit);
-	}
+    this.root.innerHTML = template;
+    this.$form = this.root.querySelector('form');
+    this.$input = this.root.querySelector('input');
+    this.$ul = this.root.querySelector('ul');
+    this.$form?.addEventListener('submit', this.handleOnSubmit);
+  }
 
-	disconnectedCallback(): void {
-		this.$form?.removeEventListener("submit", this.handleOnSubmit);
-	}
+  disconnectedCallback(): void {
+    this.$form?.removeEventListener('submit', this.handleOnSubmit);
+  }
 
-	private createItemList(value: string): HTMLLIElement {
-		const $item = document.createElement("li");
-		$item.innerHTML = `
+  private createItemList(value: string): HTMLLIElement {
+    const $item = document.createElement('li');
+    $item.innerHTML = `
 			<p>${value}</p><button class="button-remove" type="click">Delete</button>
 		`;
-		const $buttonDelete = $item.querySelector("button");
-		$buttonDelete?.addEventListener("click", () => $item.remove());
+    const $buttonDelete = $item.querySelector('button');
+    $buttonDelete?.addEventListener('click', () => $item.remove());
 
-		return $item;
-	}
+    return $item;
+  }
 
-	private handleOnSubmit = (e: Event): void => {
-		e.preventDefault();
-		if (this.value.trim()) {
-			const li = this.createItemList(this.value);
-			this.$ul?.appendChild(li);
-			this.value = "";
-		}
-	};
+  private handleOnSubmit = (e: Event): void => {
+    e.preventDefault();
+    if (this.value.trim()) {
+      const li = this.createItemList(this.value);
+      this.$ul?.appendChild(li);
+      this.value = '';
+    }
+  };
 
-	get value(): string {
-		return this.$input?.value || "";
-	}
+  get value(): string {
+    return this.$input?.value || '';
+  }
 
-	set value(newValue: string) {
-		if (!this.$input) return;
-		this.$input.value = newValue;
-	}
+  set value(newValue: string) {
+    if (!this.$input) return;
+    this.$input.value = newValue;
+  }
 
-	get title(): string {
-		return this.getAttribute("title") || "";
-	}
+  get title(): string {
+    return this.getAttribute('title') || '';
+  }
 }
 
 export default TodoList;
