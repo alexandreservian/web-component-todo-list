@@ -4,8 +4,8 @@
   "description": "How create web component",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --hot --mode development",
-    "build": "webpack --mode production"
+    "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && webpack serve --hot --mode development",
+    "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && webpack --mode production"
   },
   "author": "Alexandre Servian <alexandreservian@gmail.com>",
   "license": "ISC",
